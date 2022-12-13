@@ -1,9 +1,12 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { GlobalStyle } from 'GlobalStyles';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { Notification } from './Notification/Notification';
+import { Box } from './Box';
+import { Title, Subtitle } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -45,13 +48,13 @@ export class App extends Component {
     );
 
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <Box width="480px" m="0 auto" p="30px">
+        <Title>Phonebook</Title>
         <ContactForm
           onSubmit={this.addContact}
           contacts={this.state.contacts}
         />
-        <h2>Contacts</h2>
+        <Subtitle>Contacts</Subtitle>
         <Filter onChange={this.handleFilterChange} filter={this.state.filter} />
         <ContactList
           contacts={filteredContacts}
@@ -60,7 +63,9 @@ export class App extends Component {
         {filteredContacts.length < 1 && (
           <Notification filter={this.state.filter} />
         )}
-      </div>
+
+        <GlobalStyle />
+      </Box>
     );
   }
 }
