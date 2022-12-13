@@ -12,8 +12,15 @@ export class ContactForm extends Component {
   };
 
   handleSubmit = event => {
+    const { contacts } = this.props;
+    const { name } = this.state;
     event.preventDefault();
-    this.props.onSubmit(this.state);
+
+    if (contacts.find(contact => contact.name === name)) {
+      window.alert(`${name} is already in contacts`);
+    } else {
+      this.props.onSubmit(this.state);
+    }
     this.setState({
       name: '',
       number: '',
@@ -43,7 +50,7 @@ export class ContactForm extends Component {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button type="submit"></button>
+        <button type="submit">Add contact</button>
       </form>
     );
   }

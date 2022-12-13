@@ -7,6 +7,7 @@ export class Contact extends Component {
       <li>
         <p>{name}</p>
         <p>{number}</p>
+        <button type="button">Delete</button>
       </li>
     );
   }
