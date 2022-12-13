@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import { Notification } from './Notification/Notification';
 
 export class App extends Component {
   state = {
@@ -28,11 +29,15 @@ export class App extends Component {
   };
 
   handleFilterChange = event => {
-    const { value } = event.currentTarget;
-    this.setState({ filter: value });
+    this.setState({ filter: event.currentTarget.value });
   };
 
   render() {
+    const normalizedFilter = this.state.filter.toLowerCase();
+    const filteredContacts = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+
     return (
       <div>
         <h1>Phonebook</h1>
@@ -41,8 +46,11 @@ export class App extends Component {
           contacts={this.state.contacts}
         />
         <h2>Contacts</h2>
-        <Filter onChange={this.handleFilterChange} />
-        <ContactList contacts={this.state.contacts}></ContactList>
+        <Filter onChange={this.handleFilterChange} filter={this.state.filter} />
+        <ContactList contacts={filteredContacts}></ContactList>
+        {filteredContacts.length < 1 && (
+          <Notification filter={this.state.filter} />
+        )}
       </div>
     );
   }

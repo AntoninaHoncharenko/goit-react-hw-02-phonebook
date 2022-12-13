@@ -4,6 +4,7 @@ import { Contact } from '../ContactItem/ContactItem';
 export class ContactList extends Component {
   render() {
     const { contacts } = this.props;
+
     return (
       <ul>
         {contacts.map(({ name, number, id }) => {
