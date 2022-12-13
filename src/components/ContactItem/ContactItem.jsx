@@ -1,14 +1,13 @@
-import { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export class Contact extends Component {
-  render() {
-    const { name, number } = this.props;
-    return (
-      <li>
-        <p>{name}</p>
-        <p>{number}</p>
-        <button type="button">Delete</button>
-      </li>
-    );
-  }
-}
+export const Contact = ({ name, number, id, onDelete }) => {
+  return (
+    <li>
+      <p>{name}</p>
+      <p>{number}</p>
+      <button type="button" onClick={() => onDelete(id)}>
+        Delete
+      </button>
+    </li>
+  );
+};
