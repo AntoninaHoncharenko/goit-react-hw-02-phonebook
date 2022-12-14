@@ -27,11 +27,11 @@ export class ContactForm extends Component {
       window.alert(`${name} is already in contacts`);
     } else {
       this.props.onSubmit(this.state);
+      this.setState({
+        name: '',
+        number: '',
+      });
     }
-    this.setState({
-      name: '',
-      number: '',
-    });
   };
 
   render() {
